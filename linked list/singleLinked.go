@@ -16,6 +16,7 @@ type linkedList struct {
 	length int
 }
 
+// O(n) time complexity
 func (l *linkedList) push(value int) {
 	newNode := node{nil, value}
 
@@ -33,6 +34,35 @@ func (l *linkedList) push(value int) {
 
 }
 
+// O(n) time complexity
+func (l *linkedList) pop() {
+	head := l.head
+
+	if head == nil {
+		return
+	}
+
+	if head.next == nil {
+		l.head = nil
+		l.length--
+		return
+	}
+
+	for head != nil {
+		nextNode := head.next
+		if nextNode != nil && nextNode.next == nil {
+			head.next = nil
+
+		} else {
+			head = head.next
+		}
+
+	}
+	l.length--
+
+}
+
+// O(1) time complexity
 func (l *linkedList) shift(value int) {
 	newNode := node{nil, value}
 
@@ -53,7 +83,9 @@ func (l *linkedList) display() {
 
 	for head != nil {
 		builder.WriteString(strconv.Itoa(head.value))
-		builder.WriteString(" -> ")
+		if head.next != nil {
+			builder.WriteString(" -> ")
+		}
 		head = head.next
 	}
 
@@ -64,10 +96,12 @@ func (l *linkedList) display() {
 func SingleLinkedList() {
 	ll := linkedList{}
 
-	ll.shift(20)
-	ll.shift(22)
 	ll.push(10)
 	ll.push(11)
+	ll.push(60)
+	ll.pop()
+	ll.push(12)
+	ll.shift(100)
 	ll.display()
 
 }
