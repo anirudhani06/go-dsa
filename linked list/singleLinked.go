@@ -76,6 +76,24 @@ func (l *linkedList) shift(value int) {
 	l.length++
 }
 
+func (l *linkedList) unshift() {
+	head := l.head
+
+	if head == nil {
+		return
+	}
+
+	if head.next == nil {
+		l.head = nil
+		l.length--
+		return
+	}
+
+	l.head = head.next
+	l.length--
+
+}
+
 func (l *linkedList) display() {
 	head := l.head
 
@@ -101,6 +119,7 @@ func SingleLinkedList() {
 	ll.push(60)
 	ll.pop()
 	ll.push(12)
+	ll.unshift()
 	ll.shift(100)
 	ll.display()
 
