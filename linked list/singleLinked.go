@@ -33,6 +33,19 @@ func (l *linkedList) push(value int) {
 
 }
 
+func (l *linkedList) shift(value int) {
+	newNode := node{nil, value}
+
+	if l.head == nil {
+		l.head = &newNode
+	} else {
+		newNode.next = l.head
+		l.head = &newNode
+	}
+
+	l.length++
+}
+
 func (l *linkedList) display() {
 	head := l.head
 
@@ -45,11 +58,14 @@ func (l *linkedList) display() {
 	}
 
 	fmt.Println(builder.String())
+	fmt.Printf("Linked list length: %d\n", l.length)
 }
 
 func SingleLinkedList() {
 	ll := linkedList{}
 
+	ll.shift(20)
+	ll.shift(22)
 	ll.push(10)
 	ll.push(11)
 	ll.display()
