@@ -76,6 +76,7 @@ func (l *linkedList) shift(value int) {
 	l.length++
 }
 
+// O(1) time complexity
 func (l *linkedList) unshift() {
 	head := l.head
 
@@ -94,6 +95,7 @@ func (l *linkedList) unshift() {
 
 }
 
+// O(n) time complexity
 func (l *linkedList) display() {
 	head := l.head
 
