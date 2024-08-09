@@ -95,6 +95,18 @@ func (l *linkedList) unshift() {
 
 }
 
+func (l *linkedList) destroy(index int) {
+	i := 0
+	head := l.head
+
+	for head != nil {
+		if index == i {
+
+		}
+		i++
+	}
+}
+
 // O(n) time complexity
 func (l *linkedList) display() {
 	head := l.head
