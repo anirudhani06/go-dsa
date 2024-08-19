@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -130,6 +131,33 @@ func (l *linkedList) destroy(index int) {
 	}
 }
 
+func (l *linkedList) findByIndex(index int) (int, error) {
+
+	if l.length == 0 {
+		return 0, errors.New("empty nodes")
+	}
+
+	if index < 0 {
+		return 0, errors.New("index must be greater than 0")
+	}
+
+	if l.length <= index {
+		return 0, fmt.Errorf("index %d out of range", index)
+	}
+
+	head := l.head
+
+	i := 0
+	for head != nil {
+		if i == index {
+			return head.value, nil
+		}
+		i++
+		head = head.next
+	}
+	return 0, errors.New("could not find")
+}
+
 // O(n) time complexity
 func (l *linkedList) display() {
 	head := l.head
@@ -159,7 +187,12 @@ func SingleLinkedList() {
 	ll.unshift()
 	ll.shift(100)
 	ll.destroy(1)
-
+	result, err := ll.findByIndex(1)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
 	ll.display()
 
 }
