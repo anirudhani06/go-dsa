@@ -23,6 +23,7 @@ func (l *DList) push(data int) {
 	newNode := &DNode{data: data}
 	if head == nil {
 		l.head = newNode
+		l.length++
 		return
 	}
 
@@ -30,6 +31,25 @@ func (l *DList) push(data int) {
 		if head.next == nil {
 			newNode.prev = head
 			head.next = newNode
+			l.length++
+			return
+		}
+		head = head.next
+	}
+}
+
+func (l *DList) pop() {
+	if l.length == 0 {
+		fmt.Println("Empty nodes")
+		return
+	}
+
+	head := l.head
+
+	for head != nil {
+		if head.next == nil {
+			head.prev.next = nil
+			l.length--
 			return
 		}
 		head = head.next
@@ -67,6 +87,7 @@ func doubleLinkedList() {
 	dl.push(10)
 	dl.push(45)
 	dl.push(78)
+	dl.pop()
 
 	dl.display()
 
