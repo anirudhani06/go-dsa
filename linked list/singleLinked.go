@@ -95,15 +95,38 @@ func (l *linkedList) unshift() {
 
 }
 
+// O(n)
 func (l *linkedList) destroy(index int) {
-	i := 0
+	if index < 0 {
+		fmt.Println("Index must be greater than 0.")
+		return
+	}
+	if l.length == 0 {
+		fmt.Println("Empty nodes")
+		return
+	}
+	if index >= l.length {
+		fmt.Printf("Index %d out of range.\n", index)
+		return
+	}
+
+	if index == 0 {
+		l.head = l.head.next
+		return
+	}
+
+	i := 1
+
 	head := l.head
 
 	for head != nil {
-		if index == i {
-
+		if i == index {
+			head.next = head.next.next
+			l.length--
+			break
 		}
 		i++
+		head = head.next
 	}
 }
 
@@ -135,6 +158,8 @@ func SingleLinkedList() {
 	ll.push(12)
 	ll.unshift()
 	ll.shift(100)
+	ll.destroy(1)
+
 	ll.display()
 
 }
