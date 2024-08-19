@@ -56,10 +56,44 @@ func (l *DList) pop() {
 	}
 }
 
+func (l *DList) shift(data int) {
+
+	newNode := &DNode{data: data, next: l.head}
+
+	if l.head != nil {
+		l.head.prev = newNode
+	}
+
+	l.head = newNode
+	l.length++
+
+}
+
+func (l *DList) unshift() {
+	if l.length == 0 {
+		fmt.Println("Empty nodes")
+		return
+	}
+
+	head := l.head
+
+	if head.next == nil {
+		l.head = nil
+	} else {
+		head.next.prev = nil
+		l.head = head.next
+	}
+	l.length--
+}
+
 func (l *DList) display() {
 	head := l.head
 	var next strings.Builder
 	var prev strings.Builder
+
+	if l.length <= 0 {
+		return
+	}
 
 	for head != nil {
 		next.WriteString(strconv.Itoa(head.data))
@@ -88,6 +122,8 @@ func doubleLinkedList() {
 	dl.push(45)
 	dl.push(78)
 	dl.pop()
+	dl.shift(100)
+	dl.unshift()
 
 	dl.display()
 
