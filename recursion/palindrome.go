@@ -1,24 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	str := "malayala"
 
-	isPalindrome := palindrome(str, 0, len(str)-1)
+	isPalindrome := isPalindrome(-1)
 	fmt.Println(isPalindrome)
 }
 
-func palindrome(str string, start, end int) bool {
+func isPalindrome(x int) bool {
+	reverse := helper(x)
+	return reverse == x
+}
 
-	if start > end {
-		return true
+func helper(x int) int {
+
+	rem := x % 10
+
+	if rem == x {
+		return x
 	}
 
-	if str[start] != str[end] {
-		return false
-	}
-
-	return palindrome(str, start+1, end-1)
+	return (rem * int(math.Pow(10, float64(int(math.Log10(float64(x)))+1)-1))) + helper(x/10)
 
 }
